@@ -20,19 +20,10 @@ int cur_dance (tap_dance_state_t *state);
 //for the x tap dance. Put it here so it can be used in any keymap
 void x_finished (tap_dance_state_t *state, void *user_data);
 void x_reset (tap_dance_state_t *state, void *user_data);
-#endif
 
 
-#ifdef RGB_MATRIX_ENABLE
-HSV color_my;
-HSV color1 = {HSV_TURQUOISE}; 
-HSV color2 = {HSV_YELLOW};
-HSV color3 = {HSV_PINK};
-HSV color4 = {HSV_GREEN};
-HSV color5 = {HSV_RED};
-HSV hsv_Orang = {HSV_ORANGE};
-RGB color_my_rgb;
-#endif
+
+
 
 ///////////////////////////////////////////////////
 typedef struct {
@@ -55,7 +46,7 @@ enum {
   F4_HOLD = 0,
 };
 
-
+#endif
 
 
 ////////////////////////////////////////////////////
@@ -76,134 +67,11 @@ enum custom_keycodes {
 
 
 
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
-#ifdef RGB_MATRIX_ENABLE
-	uint8_t layer = get_highest_layer(layer_state);	
-	
-	// определчем цвета
-
-	// получаем яркость
-	color1.v = rgb_matrix_get_val();
-	color2.v = rgb_matrix_get_val();
-	color3.v = rgb_matrix_get_val();
-	color4.v = rgb_matrix_get_val();
-	color_my.v= rgb_matrix_get_val();
-	hsv_Orang.v = rgb_matrix_get_val();
-	// переводим в rgb
-	//RGB color1_rgb = hsv_to_rgb(color1);
-	//RGB color2_rgb = hsv_to_rgb(color2);
-	//RGB color3_rgb = hsv_to_rgb(color3);
-	//RGB color4_rgb = hsv_to_rgb(color4);
-
-	
-	 if (get_highest_layer(layer_state) > 0) {
-
- 			
-    	switch (get_highest_layer(layer_state)) {
-        	case 1:
-        		color_my_rgb   = hsv_to_rgb(color1);
-        		break;
-        	case 2:
-        		color_my_rgb   = hsv_to_rgb(color2);
-        		break;
-        	case 3:
-        		color_my_rgb   = hsv_to_rgb(color3);
-        		break;
-        	case 4:
-        		color_my_rgb   = hsv_to_rgb(color4);
-        		break;
-        	case 5:
-        		color_my_rgb   = hsv_to_rgb(color5);
-        		break;
-        }
-    	
-
-		
-		if (get_highest_layer(layer_state) == 5)  {
-		
-			for (uint8_t i = led_min; i <= 34; i++) 
-			{
-			        rgb_matrix_set_color(i, RGB_OFF);
-			}
-		}
-		else
-		{
-			for (uint8_t i = led_min; i <= led_max; i++) 
-			{
-			        rgb_matrix_set_color(i, RGB_OFF);
-			}
-		}
-    	
-    	
-        
-        for (uint8_t row = 0; row < MATRIX_ROWS; ++row) 
-        {
-            for (uint8_t col = 0; col < MATRIX_COLS; ++col) 
-            {
-                uint8_t index = g_led_config.matrix_co[row][col];
-
-				switch (layer) {
-					case 5:
-                		if (index >= led_min && index <= 34 && index != NO_LED && keymap_key_to_keycode(layer, (keypos_t){col,row}) > KC_TRNS ) 
-                		{
-        					rgb_matrix_set_color(index, color_my_rgb.r, color_my_rgb.g, color_my_rgb.b);
-            			}
-					break;
-					default:
-                		if (index >= led_min && index <= led_max && index != NO_LED && keymap_key_to_keycode(layer, (keypos_t){col,row}) > KC_TRNS ) 
-                		{
-        					rgb_matrix_set_color(index, color_my_rgb.r, color_my_rgb.g, color_my_rgb.b);
-
-            			}
-            		}
-            }
-        
-        }
-    }
-    
-        if (host_keyboard_led_state().caps_lock) 
-        {
-        	RGB orange_1 = hsv_to_rgb(hsv_Orang);
-        	rgb_matrix_set_color(14, orange_1.r, orange_1.g, orange_1.b);
-    	}
-    	
-        if (host_keyboard_led_state().num_lock) // Num Lock status
-        {
-            
-            if (layer == 4)  { // is layer arrow
-            
-            RGB orange_1 = hsv_to_rgb(hsv_Orang);
-            rgb_matrix_set_color(48 , orange_1.r, orange_1.g, orange_1.b);
-            }
-        }
-
-
-
-    	#endif
-   return true;
-}
 
 void keyboard_post_init_user(void) {
 
-//       for (uint8_t row = 0; row < MATRIX_ROWS; ++row) 
-//       {
-//           for (uint8_t col = 0; col < MATRIX_COLS; ++col) 
-//           {
-//               uint8_t index = g_led_config.matrix_co[row][col];
 
-//                       if (index >= led_min && index <= led_max && index != NO_LED && keymap_key_to_keycode(layer, (keypos_t){col,row}) > KC_TRNS ) 
-//                       {
-//                           rgb_matrix_set_color(index, color_my_rgb.r, color_my_rgb.g, color_my_rgb.b);
-
-//                       }
-//                   
-//           }
-//       
-//       }
-
-    //rgb_matrix_sethsv_noeeprom(HSV_OFF);
-    //rgb_matrix_set_color_all(45, 45, 45);
 }
 
 
@@ -214,15 +82,15 @@ void keyboard_post_init_user(void) {
 
 
 void suspend_power_down_user(void) {
-	#ifdef RGB_MATRIX_ENABLE
-    rgb_matrix_set_suspend_state(true);
-    #endif
+	//#ifdef RGB_MATRIX_ENABLE
+    //rgb_matrix_set_suspend_state(true);
+    //#endif
 }
 
 void suspend_wakeup_init_user(void) {
-	#ifdef RGB_MATRIX_ENABLE
-    rgb_matrix_set_suspend_state(false);
-    #endif
+	//#ifdef RGB_MATRIX_ENABLE
+    //rgb_matrix_set_suspend_state(false);
+    //#endif
     //NVIC_SystemReset();
 }
 
@@ -408,30 +276,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐────────┐                         ┌────────┌────────┬────────┬────────┬────────┬────────┬────────┐
      LCTL(KC_GRV) ,KC_NO   ,KC_NO   ,KC_NO   ,KC_NO   ,KC_NO   ,KC_NO,               XXXXXXX,  XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     RGB_TOG ,RGB_MyEFF,RGB_MOD ,RGB_SAD ,RGB_HUI ,RGB_VAI ,RGB_HUI ,                XXXXXXX , XXXXXXX, XXXXXXX    ,XXXXXXX   ,XXXXXXX   ,XXXXXXX ,XXXXXXX ,XXXXXXX,
+     RM_TOGG ,RGB_MyEFF,RM_NEXT ,RM_SATU ,RM_HUEU ,RM_VALU ,RGB_HUI ,                XXXXXXX , XXXXXXX, XXXXXXX    ,XXXXXXX   ,XXXXXXX   ,XXXXXXX ,XXXXXXX ,XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     TG(_F_TRPT),XXXXXXX ,XXXXXXX ,RGB_SAI ,RGB_HUD ,RGB_VAD ,XXXXXXX ,              XXXXXXX , XXXXXXX, XXXXXXX    ,XXXXXXX   ,XXXXXXX   ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
+     TG(_F_TRPT),XXXXXXX ,XXXXXXX ,RM_SATD ,RM_HUED ,RM_VALD ,XXXXXXX ,              XXXXXXX , XXXXXXX, XXXXXXX    ,XXXXXXX   ,XXXXXXX   ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,_______ ,                 _______ ,XXXXXXX  , XXXXXXX    ,XXXXXXX  , XXXXXXX , XXXXXXX  ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,RGB_SPI ,RGB_SPD ,XXXXXXX ,     XXXXXXX ,    XXXXXXX , TG(_ADJUST),    XXXXXXX  ,XXXXXXX  ,    XXXXXXX ,     XXXXXXX ,XXXXXXX  ,XXXXXXX
+     XXXXXXX ,RM_SPDU ,RM_SPDD ,XXXXXXX ,     XXXXXXX ,    XXXXXXX , TG(_ADJUST),    XXXXXXX  ,XXXXXXX  ,    XXXXXXX ,     XXXXXXX ,XXXXXXX  ,XXXXXXX
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
   
+  
+  #ifdef TAP_DANCE_ENABLE
     [_F_TRPT] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐────────┐                         ┌────────┌────────┬────────┬────────┬────────┬────────┬────────┐
-     QK_GESC ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,KC_F6,                   KC_F7,  KC_F8    ,KC_F9    ,KC_F10 ,_______   ,_______    ,_______ ,
+     KC_ESC  , KC_1,    KC_2,   KC_3,     KC_4,    KC_5,    KC_6,                               KC_7,   KC_8,     KC_9,    KC_0,   KC_MINS, KC_EQL, KC_BSPC ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                _______ , _______, _______    ,_______   ,_______    ,_______    ,_______    ,_______,
+     KC_TAB  ,KC_Q     ,KC_W    ,KC_E    ,KC_R    ,KC_T   ,KC_PGUP ,                KC_HOME ,  KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_LBRC, KC_RBRC,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                _______ , _______, _______    ,_______   ,_______    ,_______    ,_______ ,_______ ,
+      SYM_L  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,KC_PGDN ,                KC_END , KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,KC_QUOT ,KC_ENT ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,                _______ ,_______  ,_______    ,_______  , _______ ,_______    ,_______ ,
+     KC_LSFT ,KC_Z    ,KC_X    ,KC_C  ,KC_V ,KC_B  , KC_SPC ,                         MO(_ADJUST) ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,MT(MOD_RSFT, KC_BSLS) ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     _______ ,_______ ,_______ ,_______ ,     _______ ,    _______ , _______ ,        _______  ,_______  ,    _______ ,     _______ ,_______  ,_______
+     KC_LCTL ,KC_LGUI ,KC_LALT ,KC_ADEN ,  KC_BSPC , KC_DEL ,TG(_ADJUST) ,                 ADJT  ,KC_PSCR  ,    KC_NAGR ,     KC_RALT ,KC_APP,KC_RCTL 
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   )
-  
+  #else
+
+  [_F_TRPT] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐────────┐                         ┌────────┌────────┬────────┬────────┬────────┬────────┬────────┐
+     KC_ESC  , KC_1,    KC_2,   KC_3,     KC_4,    KC_5,    KC_6,                               KC_7,   KC_8,     KC_9,    KC_0,   KC_MINS, KC_EQL, KC_BSPC ,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     KC_TAB  ,KC_Q     ,KC_W    ,KC_E    ,KC_R    ,KC_T   ,KC_PGUP ,                KC_HOME ,  KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_LBRC, KC_RBRC,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+      SYM_L  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,KC_PGDN ,                KC_END , KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,KC_QUOT ,KC_ENT ,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     KC_LSFT ,KC_Z    ,KC_X    ,KC_C  ,KC_V ,KC_B  , KC_SPC ,                         MO(_ADJUST) ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,MT(MOD_RSFT, KC_BSLS) ,
+  //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
+     KC_LCTL ,KC_LGUI ,KC_LALT ,KC_ADEN ,  KC_BSPC , KC_DEL ,TG(_ADJUST) ,                 ADJT  ,KC_PSCR  ,    KC_NAGR ,     KC_RALT ,KC_APP,KC_RCTL 
+  //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
+  )
+  #endif
   
 };
 

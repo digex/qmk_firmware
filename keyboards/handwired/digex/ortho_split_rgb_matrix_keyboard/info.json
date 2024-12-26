@@ -2,45 +2,51 @@
     "manufacturer": "Petrov Denis",
     "keyboard_name": "ortho_split_rgb_matrix_keyboard",
     "maintainer": "petrvden",
-    "bootloader": "stm32duino",
+    "bootloader": "rp2040",
     "diode_direction": "ROW2COL",
-    "processor": "STM32F103",
+    "processor": "RP2040",
+    "bootmagic": {
+        "matrix": [0, 7]
+    },
     "url": "",
     "features": {
         "bootmagic": true,
         "command": false,
         "console": false,
-       // "tap_dance" : true,
+        //"tap_dance" : true,
         "extrakey": true,
         "mousekey": true,
-        //"nkro": true,
+        "nkro": true,
         "rgb_matrix": true,
     },
     "matrix_pins": {
-        "cols":  ["A1", "A6", "A7", "B0", "B1", "B10", "B11", "NO_PIN" ],
-        "rows":  ["B15", "B14", "B13", "B12", "A15"],
-        "io_delay": 5
+        "cols": ["GP21", "GP22", "GP26", "GP27", "GP28", "GP29", "GP23", "NO_PIN"],
+        "rows": ["GP2", "GP3", "GP4", "GP5", "GP6"]
     },
     "split": {
         "enabled": true,
         "handedness": {
-            "pin": "B3"
+            "pin": "GP7"
         },
         "bootmagic": {
             "matrix": [4, 0]
         },
         "matrix_pins": {
             "right": {
-            "cols": ["A8", "A1", "A6", "A7", "B0", "B1", "B10", "B11" ],
-            "rows": ["B15", "B14", "B13", "B12", "A15"]
+        	"cols": ["GP20", "GP21", "GP22", "GP26", "GP27", "GP28", "GP29", "GP23" ],
+        	"rows": ["GP2", "GP3", "GP4", "GP5", "GP6"]
                      },
         },
         "transport":{
             "sync": {
                 "detected_os": true,
                 "layer_state": true,
-                //"led_state": true,
+                "indicators": false,
             }
+        },
+        "serial": {
+            "driver": "vendor",
+            "pin": "GP1"
         }
     },
     "usb": {
@@ -188,8 +194,8 @@
             ],
     },
     "ws2812": {
-        "pin": "B4",
-        //"driver": "pwm"
+        "driver": "vendor",
+        "pin": "GP10"
     },
     "layouts": {
         "LAYOUT": {
