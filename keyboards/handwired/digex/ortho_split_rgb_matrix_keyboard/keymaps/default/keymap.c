@@ -15,6 +15,17 @@
 #define _ADJUST 	5
 #define _ARROW 		4
 
+
+enum custom_keycodes {
+  QWERTY = SAFE_RANGE,
+  SYMB,
+  NAV,
+  ADJUST,
+  F_TRPT,
+  RGB_MyEFF,
+};
+
+
 #ifdef TAP_DANCE_ENABLE
 int cur_dance (tap_dance_state_t *state);
 //for the x tap dance. Put it here so it can be used in any keymap
@@ -49,33 +60,10 @@ enum {
 #endif
 
 
-////////////////////////////////////////////////////
-
-
-enum custom_keycodes {
-  QWERTY = SAFE_RANGE,
-  SYMB,
-  NAV,
-  ADJUST,
-  F_TRPT,
-  RGB_MyEFF,
-};
-
-
-
-
-
-
-
-
-
 void keyboard_post_init_user(void) {
 
 
 }
-
-
-
 
 
 
@@ -96,16 +84,16 @@ void suspend_wakeup_init_user(void) {
 
 
 
+
 // Shortcut to make keymap more readable
 #define SYM_L   LT(_SYMB, KC_CAPS)
 #define ADJT   MO(_ADJUST)
-#define KC_ALAS LALT_T(KC_PAST)
-#define KC_CTPL LCTL_T(KC_BSLS)
+
 
 #define KC_F4_HOLD (KC_BSLS)
 
 #define KC_NAGR LT(_MOUSE, KC_SPC)
-#define KC_NAMI LT(_MOUSE, KC_MINS)
+
 
 #define KC_ADEN LT(_ARROW, KC_SPC)
 #define KC_ADPU LT(_ADJUST, KC_PGUP)
