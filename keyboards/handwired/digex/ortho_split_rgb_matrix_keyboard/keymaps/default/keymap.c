@@ -33,9 +33,6 @@ void x_finished (tap_dance_state_t *state, void *user_data);
 void x_reset (tap_dance_state_t *state, void *user_data);
 
 
-
-
-
 ///////////////////////////////////////////////////
 typedef struct {
   bool is_press_action;
@@ -61,12 +58,8 @@ enum {
 
 
 void keyboard_post_init_user(void) {
-
-
+////
 }
-
-
-
 
 
 void suspend_power_down_user(void) {
@@ -81,8 +74,6 @@ void suspend_wakeup_init_user(void) {
     //#endif
     //NVIC_SystemReset();
 }
-
-
 
 
 // Shortcut to make keymap more readable
@@ -179,7 +170,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record ) {
   return true;
 }
 
-
  
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -250,13 +240,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //┌────────┬────────┬────────┬────────┬────────┬────────┐                        	         ┌────────┌────────┬────────┬────────┬────────┬────────┬────────┐
     LCTL(KC_GRV),KC_HOME,XXXXXXX ,KC_END ,XXXXXXX ,XXXXXXX ,XXXXXXX ,        	  	 XXXXXXX, KC_PAST, XXXXXXX , XXXXXXX,  KC_MINS, KC_EQL, KC_BSPC ,
  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐               	         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-    XXXXXXX ,XXXXXXX ,KC_UP ,XXXXXXX ,KC_WH_U ,XXXXXXX ,KC_PGUP ,           	  	 XXXXXXX , KC_NUM , KC_P7    ,KC_P8   ,KC_P9   ,XXXXXXX ,XXXXXXX ,XXXXXXX,
+    XXXXXXX ,XXXXXXX ,KC_UP ,XXXXXXX ,KC_WH_U ,XXXXXXX ,KC_PGUP ,           	  	 XXXXXXX , KC_NUM , KC_7    ,KC_8   ,KC_9   ,XXXXXXX ,XXXXXXX ,XXXXXXX,
  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤               	         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-    TG(_F_TRPT),KC_LEFT ,KC_DOWN ,KC_RIGHT ,KC_WH_D ,XXXXXXX ,KC_PGDN,        	  	 XXXXXXX , XXXXXXX, KC_P4    ,KC_P5   ,KC_P6   ,XXXXXXX ,XXXXXXX ,KC_ENT ,
+    TG(_F_TRPT),KC_LEFT ,KC_DOWN ,KC_RIGHT ,KC_WH_D ,XXXXXXX ,KC_PGDN,        	  	 XXXXXXX , XXXXXXX, KC_4    ,KC_5   ,KC_6   ,XXXXXXX ,XXXXXXX ,KC_ENT ,
  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐      	┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-    _______ ,LCTL(KC_LEFT),XXXXXXX ,LCTL(KC_RIGHT) ,XXXXXXX ,XXXXXXX ,XXXXXXX , 	 _______ ,XXXXXXX  , KC_P1    ,KC_P2  , KC_P3 , KC_PSLS ,XXXXXXX ,
+    _______ ,LCTL(KC_LEFT),XXXXXXX ,LCTL(KC_RIGHT) ,XXXXXXX ,XXXXXXX ,XXXXXXX , 	 _______ ,XXXXXXX  , KC_1    ,KC_2  , KC_3 , KC_PSLS ,XXXXXXX ,
  //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤      	├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-    _______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,     XXXXXXX ,    XXXXXXX ,XXXXXXX ,    	 XXXXXXX  ,XXXXXXX  ,    KC_P0 ,     KC_PDOT ,XXXXXXX  ,KC_RCTL
+    _______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,     XXXXXXX ,    XXXXXXX ,XXXXXXX ,    	 XXXXXXX  ,XXXXXXX  ,    KC_0 ,     KC_PDOT ,XXXXXXX  ,KC_RCTL
  //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘      	└────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
   

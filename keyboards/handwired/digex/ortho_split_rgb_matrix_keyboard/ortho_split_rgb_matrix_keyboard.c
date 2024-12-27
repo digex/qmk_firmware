@@ -18,10 +18,12 @@
 #include "quantum.h"
 
 
-
-
-
 void keyboard_pre_init_kb(void){
+
+//disable onboard led
+	gpio_set_pin_output(GP23);
+	gpio_write_pin_low(GP23);
+//
     keyboard_pre_init_user();
 }
 
@@ -36,7 +38,7 @@ HSV color5 = {HSV_RED};
 HSV hsv_Orang = {HSV_ORANGE};
 RGB color_my_rgb;
 
-
+#endif
 
 bool rgb_matrix_indicators_advanced_kb(uint8_t led_min, uint8_t led_max) {
 
@@ -156,5 +158,3 @@ void suspend_wakeup_init_kb(void) {
     //rgb_matrix_set_suspend_state(false);
     //suspend_wakeup_init_user();
 }
-
-#endif
